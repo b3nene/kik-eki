@@ -1,5 +1,7 @@
 # pip install numpy scikit-learn matplotlib
+import sklearn.neighbors
 import numpy as np
+import sklearn
 
 MODEL = 'knn'  # 'knn' or 'nb'
 
@@ -9,16 +11,25 @@ X_q = []  # dummy until code is implemented
 #TODO Load X, y and x_q from csv files.
 # Hint: Use np.loadtxt() https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html
 
+X = np.loadtxt("/home/bene/Documents/Code/kik-eki/Ü4/X.csv", skiprows=1)
+y = np.loadtxt("/home/bene/Documents/Code/kik-eki/Ü4/y.csv", skiprows=1)
+X_q = np.loadtxt("/home/bene/Documents/Code/kik-eki/Ü4/test.csv")
+
 print(X)
 print(y)
 print(X_q)
+
+print("#####################################")
 
 from sklearn.neighbors import KNeighborsClassifier
 
 #TODO Fit a kNN classifier to (X,y)
 # Hint: Use KNeighborsClassifier from sklearn https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+model = sklearn.neighbors.KNeighborsClassifier()
+model.fit(X,y)
 
-y_hat = []  # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
+
+y_hat = [model.predict(X_q)] # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
 #TODO Predict the class of the query points x_q
 # Hint: Use the predict() method of the model
 
@@ -26,9 +37,9 @@ print(y_hat)
 
 # TODO Print the species names corresponding to the y_hat values
 # Hint: If you don't know the names, read them in the header line in y.csv
-print("")
+print("species: 0=Setosa, 1=Versicolor, 2=Virginica")
 
-exit()  # Remove this command when you implemented everything above
+#exit()  # Remove this command when you implemented everything above
 # -----------------------------------------------------------------
 # Below this line: Prepared stuff for visualization,
 # with options we might need in the next lecture.
@@ -39,8 +50,11 @@ exit()  # Remove this command when you implemented everything above
 if 'MODEL' not in locals():
     MODEL = 'unk'
 
+# IMPORTANT: pip install PyQt6 before plotting!
+
 from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
+
 
 # Define function predict_with_doubt() if such a function has not been defined yet:
 if MODEL == 'nb':
