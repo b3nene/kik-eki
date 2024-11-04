@@ -25,7 +25,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 #TODO Fit a kNN classifier to (X,y)
 # Hint: Use KNeighborsClassifier from sklearn https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
-model = sklearn.neighbors.KNeighborsClassifier()
+model = sklearn.neighbors.KNeighborsClassifier(n_neighbors=9)
 model.fit(X,y)
 
 
