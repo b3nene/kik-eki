@@ -29,16 +29,19 @@ X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X,y,
 
 X_q_test = [X_test, y_test]
 
+print("X_test:",X_test)
+print("y_test:",y_test)
+
 print("#####################################")
 from sklearn.neighbors import KNeighborsClassifier
 
 #TODO Fit a kNN classifier to (X,y)
 # Hint: Use KNeighborsClassifier from sklearn https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
-model = sklearn.neighbors.KNeighborsClassifier(n_neighbors=12)
+model = sklearn.neighbors.KNeighborsClassifier(n_neighbors=7)
 model.fit(X_train,y_train)
 
 
-y_hat = [model.predict(X_test)] # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
+y_hat = model.predict(X_test) # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
 #TODO Predict the class of the query points x_q
 # Hint: Use the predict() method of the model
 
