@@ -1,4 +1,6 @@
 # pip install numpy scikit-learn matplotlib
+import sklearn.metrics
+import sklearn.model_selection
 import sklearn.neighbors
 import numpy as np
 import sklearn
@@ -21,19 +23,32 @@ print(X_q)
 
 print("#####################################")
 
+print(" Generating Train and Val Daten")
+
+X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X,y, test_size=0.2,shuffle=True)
+
+X_q_test = [X_test, y_test]
+
+print("#####################################")
 from sklearn.neighbors import KNeighborsClassifier
 
 #TODO Fit a kNN classifier to (X,y)
 # Hint: Use KNeighborsClassifier from sklearn https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 model = sklearn.neighbors.KNeighborsClassifier(n_neighbors=12)
-model.fit(X,y)
+model.fit(X_train,y_train)
 
 
-y_hat = [model.predict(X_q)] # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
+y_hat = [model.predict(X_test)] # the German "Dach" symbol ^ is used to denote the predicted value and is called "hat" in English
 #TODO Predict the class of the query points x_q
 # Hint: Use the predict() method of the model
 
 print(y_hat)
+
+print("##############################")
+
+acc = sklearn.metrics.accuracy_score(y_true=y_test, y_pred=y_hat, normalize=True)
+
+print("Accuracy: ", acc)
 
 # TODO Print the species names corresponding to the y_hat values
 # Hint: If you don't know the names, read them in the header line in y.csv
